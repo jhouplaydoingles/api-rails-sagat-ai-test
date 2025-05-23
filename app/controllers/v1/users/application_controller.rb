@@ -2,7 +2,6 @@ module V1
   module Users
     class ApplicationController < ActionController::API
       before_action :authorize
-      # before_action :set_current_user
 
       def decode_token
         auth_header = request.headers['Authorization']
@@ -30,6 +29,7 @@ module V1
         @user = User.find_by(id: user_id)
 
         return false if @user.nil?
+
         return render json: { error: 'Acesso negado' }, status: :unauthorized if @user.is_deleted == true
         return render json: { error: 'Sua conta foi logada em outro local ou Token expirou'}, status: :unauthorized unless @user.end_session.to_i == local_time.to_i
         return render json: { error: 'Verifique seu Email antes de continuar'}, status: :unauthorized if @user.is_email_valid == false
@@ -40,7 +40,7 @@ module V1
 
       def authorize
         unless authorized_user
-          render json: { message: 'Talvez você não possua o token ou expirou' }, status: :unauthorized
+          render json: { error: 'Talvez você não possua o token ou expirou' }, status: :unauthorized
         end
       end
     end
