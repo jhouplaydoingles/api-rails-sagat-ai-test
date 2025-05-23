@@ -165,8 +165,8 @@ http://localhost:3000
 
 **Observação:**
 - `transfer_type`: `1` = PIX, `2` = TED (uso apenas estético)
-- `make_success`: controle de simulação de sucesso no ambiente de testes
-
+- `make_success`: usado para controle e testes, 'true', faz com que a transação de conta possua um sucesso, 'falso' para que não.
+se caso o 'make_success' não seja enviado, ficara aleatorio, mas com mais chances de sucesso.
 ---
 
 ## 📊 Listagem de Extração de Transferências
