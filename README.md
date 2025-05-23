@@ -196,10 +196,6 @@ A resposta inclui metadados úteis para paginação:
 - `total_records`: Total de transferências encontradas
 - `total_pages`: Total de páginas disponíveis
 - `current_page`: Página atual (ajustada para limites válidos)
-- `has_next_page`: Se há próxima página
-- `has_previous_page`: Se há página anterior
-- `start_record` e `end_record`: Índice dos registros exibidos
-
 ---
 
 ## 🧪 Exemplo de Requisição com Filtros
