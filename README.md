@@ -21,7 +21,7 @@ Este guia tem como objetivo auxiliar o usuário a configurar e executar a API de
 
 ```bash
 git clone https://github.com/jhouplaydoingles/docker-api-auth-test
-git clone https://github.com/jhouplaydoingles/api-auth-test
+git clone https://github.com/jhouplaydoingles/api-rails-sagat-ai-test
 ```
 
 ### 2. Estrutura do Projeto
