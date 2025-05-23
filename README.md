@@ -80,3 +80,128 @@ http://localhost:3000
 ```
 
 ---
+
+
+# 📘 Documentação da API de Autenticação e Transferência Bancária
+
+**Base URL:** `http://localhost:3000/v1`
+
+---
+
+## 🔐 Autenticação de Usuário
+
+### ▶️ Criar Conta
+
+- **URL:** `POST /auth/sign_up`
+- **Body (JSON):**
+```json
+{
+  "user": {
+    "name": "Maria mandalena",
+    "email": "usuario@example.com",
+    "password": "1234"
+  }
+}
+```
+
+### 🔑 Login
+
+- **URL:** `PUT /auth/sign_in`
+- **Body (JSON):**
+```json
+{
+  "user": {
+    "email": "usuario@example.com",
+    "password": "1234"
+  }
+}
+```
+
+---
+
+## 👤 Informações do Usuário
+
+- **URL:** `GET /users/infos`
+- **Headers:**
+  - Authorization: `Bearer <TOKEN_JWT>`
+
+---
+
+## 🏦 Contas Bancárias do Usuário
+
+### 📄 Listar contas para transferências
+
+- **URL:** `GET /users/bank_accounts`
+- **Headers:**
+  - Authorization: `Bearer <TOKEN_JWT>`
+
+### 📄 Listar contas bancárias do próprio usuário
+
+- **URL:** `GET /users/bank_accounts/my`
+- **Headers:**
+  - Authorization: `Bearer <TOKEN_JWT>`
+
+---
+
+## 💸 Transferências Bancárias
+
+### 🔁 Efetuar Transferência
+
+- **URL:** `POST /users/bank_account_transfers`
+- **Headers:**
+  - Authorization: `Bearer <TOKEN_JWT>`
+- **Body (JSON):**
+```json
+{
+  "bank_account_transfer": {
+    "to_user_bank_account_id": 4,
+    "from_user_bank_account_id": 6,
+    "transfer_type": 1,
+    "amount_to_transfer": 10.0
+  },
+  "make_success": true
+}
+```
+
+**Observação:**
+- `transfer_type`: `1` = PIX, `2` = TED (uso apenas estético)
+- `make_success`: controle de simulação de sucesso no ambiente de testes
+
+---
+
+## 📊 Listagem de Extração de Transferências
+
+### 📥 Endpoint de Extrato
+
+- **URL:** `GET /users/bank_account_transfers/statements`
+- **Headers:**
+  - Authorization: `Bearer <TOKEN_JWT>`
+
+### 🔍 Parâmetros de Filtro
+
+| Parâmetro         | Tipo     | Descrição |
+|------------------|----------|-----------|
+| `start_date`     | Date     | Data inicial (formato ISO 8601 ou `YYYY-MM-DD`) |
+| `end_date`       | Date     | Data final (default: agora) |
+| `min_value`      | Decimal  | Valor mínimo da transferência |
+| `max_value`      | Decimal  | Valor máximo da transferência |
+| `transfer_type`  | String   | `'sent'` para enviadas, `'received'` para recebidas, omitido para ambas |
+| `per_page`       | Integer  | Registros por página (default: 10) |
+| `page`           | Integer  | Página atual (default: 1) |
+
+### 🔁 Lógica de Paginação
+
+A resposta inclui metadados úteis para paginação:
+
+- `total_records`: Total de transferências encontradas
+- `total_pages`: Total de páginas disponíveis
+- `current_page`: Página atual (ajustada para limites válidos)
+- `has_next_page`: Se há próxima página
+- `has_previous_page`: Se há página anterior
+- `start_record` e `end_record`: Índice dos registros exibidos
+
+---
+
+## 🧪 Exemplo de Requisição com Filtros
+
+**GET /users/bank_account_transfers/statements?start_date=2025-05-01&end_date=2025-05-23&min_value=100&transfer_type=sent&page=2&per_page=5**
