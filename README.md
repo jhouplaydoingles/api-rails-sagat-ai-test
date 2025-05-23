@@ -11,7 +11,7 @@ Este guia tem como objetivo auxiliar o usuário a configurar e executar a API de
 - Git instalado
 - Acesso aos repositórios:
   - Docker: [https://github.com/jhouplaydoingles/docker-api-auth-test](https://github.com/jhouplaydoingles/docker-api-auth-test)
-  - API: [https://github.com/jhouplaydoingles/api-auth-test](https://github.com/jhouplaydoingles/api-auth-test)
+  - API: [https://github.com/jhouplaydoingles/api-rails-sagat-ai-test](https://github.com/jhouplaydoingles/api-rails-sagat-ai-test)
 
 ---
 
