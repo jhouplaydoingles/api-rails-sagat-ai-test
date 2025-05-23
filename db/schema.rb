@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_23_115648) do
+ActiveRecord::Schema[7.0].define(version: 2025_05_23_142438) do
+  create_table "bank_account_transfers", force: :cascade do |t|
+    t.boolean "was_success"
+    t.integer "to_user_bank_account_id"
+    t.integer "transfer_type"
+    t.integer "from_user_bank_account_id"
+    t.decimal "amount_to_transfer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_user_bank_account_id"], name: "index_bank_account_transfers_on_from_user_bank_account_id"
+    t.index ["to_user_bank_account_id"], name: "index_bank_account_transfers_on_to_user_bank_account_id"
+  end
+
+  create_table "user_bank_accounts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "bank_name"
+    t.string "bank_code"
+    t.string "agency_number"
+    t.string "agency_digit"
+    t.string "account_number"
+    t.string "account_digit"
+    t.string "account_type"
+    t.string "document"
+    t.string "holder_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "amount"
+    t.index ["user_id"], name: "index_user_bank_accounts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -31,4 +60,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_23_115648) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "user_bank_accounts", "users"
 end

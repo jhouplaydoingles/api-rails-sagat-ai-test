@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  was_success: false
+  to_user_bank_account_id: 1
+  transfer_type: 1
+  receive_user_bank_account_id: 1
+  amount_to_transfer: 9.99
+
+two:
+  was_success: false
+  to_user_bank_account_id: 1
+  transfer_type: 1
+  receive_user_bank_account_id: 1
+  amount_to_transfer: 9.99

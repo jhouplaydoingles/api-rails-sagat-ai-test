@@ -9,7 +9,14 @@ Rails.application.routes.draw do
     post '/auth/confirm_recover_password', to: 'auth#confirm_recover_password'
 
     namespace :users do
-      get '/infos', to: 'infos#show'
+      get '/infos', to: 'users#show'
+
+      post '/bank_account_transfers', to: 'bank_account_transfers#create'
+      get '/bank_account_transfers/statements', to: 'bank_account_transfers#index'
+      
+
+      get '/bank_accounts', to: 'user_bank_accounts#index'
+      get '/bank_accounts/my', to: 'user_bank_accounts#my'
     end
   end
 end
